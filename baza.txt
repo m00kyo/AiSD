@@ -1,0 +1,164 @@
+/* ZACHLANNA RESZTA
+ void main() {
+   int[] nominal = {500, 200, 100, 50, 20, 10, 5, 2, 1};
+   int[] dostepnosc = {0, 0, 4, 2, 3, 1, 0, 8, 5};
+
+   double reszta = 6.42 * 100;
+   int i = 0;
+
+   while(reszta>0){
+       if(nominal[i]<=reszta){
+           if(dostepnosc[i]>0){
+               reszta = reszta - nominal[i];
+               dostepnosc[i]--;
+               System.out.println("Wydaje: " + nominal[i]/100.0);
+               System.out.println("Zostalo mi jeszcze: " + dostepnosc[i] + " takich monet");
+           } else {
+               System.out.println("Zabrakło mi monet :<");
+               i++;
+           }
+       } else {
+           i++;
+       }
+       if(i>=9){
+           System.out.println("Nie mg wydac reszty!");
+           break;
+       }
+   }
+}
+--------------------
+PLECAK BF 
+void main() {
+    int max_wartosc = BF(0, 0);
+    System.out.println(max_wartosc);
+}
+
+int[] wartosc_przedmiotu = {6,4,5,7,10,2,3};
+int[] objetosc_przedmiotu = {6,2,3,2,3,1,2};
+
+int BF(int i, int aktualna_waga){
+    int mac_plecak = 15;
+    int wzialem = 0;
+    int nie_wzialem = 0;
+
+
+    if(i == 7){
+        return 0;
+    }
+    if(aktualna_waga+objetosc_przedmiotu[i]>mac_plecak){
+        return BF(i + 1, aktualna_waga);
+    }
+
+    wzialem = wartosc_przedmiotu[i] + BF(i+1, objetosc_przedmiotu[i]+aktualna_waga);
+    nie_wzialem = BF(i+1, aktualna_waga);
+
+    return Math.max(wzialem, nie_wzialem);
+}
+
+---------
+MONTE CARLO
+void main() {
+  double wynik =  MC(150);
+    System.out.println(wynik);
+}
+
+double MC(int n){
+
+    int trafienia = 0;
+     Random random = new Random();
+
+     for(int i = 0; i < n; i++){
+        double x = random.nextDouble();
+        double y = random.nextDouble();
+
+        double granica = -Math.cos(x+Math.PI / 2);
+
+        if(y<=granica){
+            trafienia++;
+        }
+     }
+     return (double)trafienia / n;
+}
+
+-------
+
+kosmo
+
+static List<Integer> naj_Zaloga = null;
+
+static int[] k = {
+        0b1001, //k1
+        0b0101, //k2
+        0b0110, //k3
+        0b1100, //k4
+        0b0011, //k5
+        0b0101, //k6
+};
+
+static int cel = 0b1111;
+
+void main(){
+
+}
+
+void Rekrutuj(int index,  int akt_umiejetnosc, List<Integer> aktualna_Ekipa){
+
+    if(naj_Zaloga != null && naj_Zaloga.size()<=aktualna_Ekipa.size()){
+        return;
+    }
+
+    if(akt_umiejetnosc==cel){
+        naj_Zaloga = new ArrayList<Integer>(aktualna_Ekipa);
+        return;
+    }
+
+    if(index==k.length){
+        return;
+    }
+
+    aktualna_Ekipa.add(index);
+    Rekrutuj(index + 1, akt_umiejetnosc | k[index],aktualna_Ekipa);
+
+   aktualna_Ekipa.removeLast();
+   Rekrutuj(index+1, akt_umiejetnosc, aktualna_Ekipa);
+}
+
+------
+zachlanny plecak 
+
+void main() {
+    //ZACHŁANNY PROBLEM PLECAKA :)
+    int[] przedmioty_w = {22, 33, 43, 56, 76};
+    int[] przedmioty_obj = {1, 2, 10, 7, 9};
+    int plecak_max = 10;
+    int n = 5;
+    boolean[] czySpakowane = new boolean[n];
+    int w_plecaku = 0;
+    int wartosc_wplecaku = 0;
+    int liczba = 0;
+
+    while(true){
+        int id_przedmiotu = -1;
+        for(int i=0; i <= 4; i++){
+            if(czySpakowane[i]==false && przedmioty_obj[i]+w_plecaku<=plecak_max){
+                if(id_przedmiotu == -1){
+                    id_przedmiotu = i;
+                }
+                else if(przedmioty_w[i]>przedmioty_w[id_przedmiotu]){
+                    id_przedmiotu = i;
+                }
+            }
+        }
+        if(id_przedmiotu == -1){
+            break;
+        }
+        czySpakowane[id_przedmiotu] = true;
+        w_plecaku = w_plecaku + przedmioty_obj[id_przedmiotu];
+        wartosc_wplecaku = przedmioty_w[id_przedmiotu] + wartosc_wplecaku;
+        liczba++;
+    }
+    System.out.println("Wartość w plecaku: " + wartosc_wplecaku);
+    System.out.println("Zapakowałeś " + liczba + " przedmiotów.");
+
+}
+ */
